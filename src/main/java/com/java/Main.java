@@ -27,10 +27,11 @@ public class Main {
 		Main obj = new Main();
 		try {
 			obj.insertRecords();
-			obj.fetchAllData();
+			/*	obj.fetchAllData();
 			obj.fetchDataById();
 			obj.updateData();
-			obj.deleteData();
+			obj.deleteData();*/
+			obj.pagination(20, 20);
 		} finally {
 			sf.close();
 		}
@@ -98,6 +99,22 @@ public class Main {
 		s.close();
 		
 	}
+	/*1>> 2: 20 | 20 :  2>> 40, 20*/
+	// ?start=index&limit=maxNumber
+	public void pagination(int index, int maxNumber) {
+		Session s = sf.openSession();
+		Query<Student> query=s.createQuery("from st");
+		query.setFirstResult(index); //starting from which index
+		query.setMaxResults(maxNumber);//no of records to fetch
+		List<Student> list=query.list();
+		System.out.println(list);
+		s.close();
+		
+	}
 	//join queries 
 	//subquery using hql
+	//params
+	public void filterData() {
+		
+	}
 }
